@@ -1,0 +1,25 @@
+<form class="w-1/6 mx-auto mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
+    <label for="email" class="block font-medium mb-2">E-mail: <mat-icon matPrefix
+            style="padding-top: 5px;">person</mat-icon>
+    </label>
+    <input matInput type="text" class="border border-gray-300 p-2 w-full mb-4 rounded-md" formControlName="email"
+        required />
+
+    <label for="password" class="block font-medium mb-2">Jelszó: <mat-icon matPrefix
+            style="padding-top: 2.5px;">lock_outline</mat-icon>
+    </label>
+    <input type="password" id="password" class="border border-gray-300 p-2 w-full mb-4 rounded-md"
+        formControlName="password" required>
+
+    <div class="flex justify-center">
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+            Bejelentkezés <mat-icon>login</mat-icon>
+        </button>
+    </div>
+</form>
+<div class="flex justify-center mt-4">
+    <div class="mat-menu-item">
+        <a routerLink="/register" class="text-blue-500 hover:underline">Nem regisztrált még? Kattints ide!</a>
+    </div>
+</div>

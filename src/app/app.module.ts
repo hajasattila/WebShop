@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AngularFireModule } from '@angular/fire/compat'
 
 import { ProductsHeaderComponent } from './pages/home/components/products-header/products-header.component';
 import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
@@ -30,6 +31,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreService } from './services/store.service';
 import { RegisterComponent } from './pages/register/register.component';
 
+import { environment } from 'src/environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { LoginComponent } from './pages/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +49,8 @@ import { RegisterComponent } from './pages/register/register.component';
     FiltersComponent,
     HeaderComponent,
     CartComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -59,8 +70,14 @@ import { RegisterComponent } from './pages/register/register.component';
     MatSnackBarModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule,
+    MatIconModule,
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
   ],
   providers: [CartService, StoreService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

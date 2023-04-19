@@ -1,47 +1,46 @@
 <body ng-cloak ng-app="contactForm">
     <div class="wrap" ng-controller="ContactFormCtrl">
         <h1>Regisztáricó <mat-icon matPrefix style="padding-top: 5px;">person</mat-icon></h1>
-
-        <form name="form" novalidate ng-submit="submitMessage">
-            <div class="form-group">
-                <label><mat-icon matPrefix style="padding-top: 5px;">person_outline</mat-icon> Felhasználónév</label>
-                <input name="userName" type="text" required ng-model="form.name" ng-minlength="minlengthName">   
-            </div>
-            <div class="error-block" ng-show="form.userName.$touched">
-                <div ng-show="form.userName.$error.minlength">Minimum 3 karakter hosszú legyen</div>
-            </div>
-
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" name="form">
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 5px;">email</mat-icon> Email cím</label>
-                <input name="userEmail" type="email" required ng-model="form.email">  
+                <input name="email" type="email" required formControlName="email" placeholder="Minta@email.com">
             </div>
-            <div class="error-block" ng-show="form.userEmail.$touched">
-                <div ng-show="form.userEmail.$error.email">Érvényes e-mail címet adj meg!</div>
+            <div class="error-block" *ngIf="submitted && !registerForm.controls['email'].valid">
+                <div *ngIf="registerForm.controls['email'].hasError('email')">Érvényes e-mail címet adj meg!</div>
             </div>
 
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon>Jelszó</label>
-                <input name="userPassword" type="password" required ng-model="form.password"
-                    ng-minlength="minlengthPass" ng-pattern="check">
+                <input name="password" type="password" required formControlName="password">
             </div>
-            <div class="error-block" ng-show="form.userPassword.$touched">
-                <div ng-show="form.userPassword.$error.minlength">A jelszó minimum 6 karakter hosszú legyen</div>
-            </div>
-
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon> Jelszó
                     megerősítés</label>
-                <input name="userPasswordAgain" type="password" required ng-model="form.password"
-                    ng-minlength="minlengthPass" ng-pattern="check">
-            </div>
-            <div class="error-block" ng-show="form.userPassword.$touched">
-                <div ng-show="form.userPassword.$error.minlength">Egyezzenek a jelszavak</div>
+                <input name="confirmPassword" type="password" required formControlName="confirmPassword">
             </div>
 
-            <button ng-disabled="form.$invalid" type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Regisztráció</button>
+            <div class="error-block" *ngIf="submitted && registerForm.hasError('passwordsDontMatch')">
+                <div *ngIf="registerForm.errors?.['passwordsDontMatch'] === true">A jelszavak nem egyeznek meg</div>
+            </div>
+            <div class="error-block" *ngIf="submitted && (password?.invalid || confirmPassword?.invalid)">
+                <div *ngIf="password?.errors?.['minlength']">A jelszó minimum 6 karakter hosszú legyen</div>
+                <div *ngIf="password?.errors?.['pattern']">A jelszónak tartalmaznia kell legalább egy számot, egy
+                    nagybetűt és egy kisbetűt
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;"></div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Regisztráció
+            </button>
         </form>
 
         <div style="margin-top: 1rem;"></div>
+        <div class="flex justify-center mt-4">
+            <div class="mat-menu-item">
+                <a routerLink="/login" class="text-blue-500 hover:underline">Van már fiókod? Jelenetkezz be!</a>
+            </div>
+        </div>
     </div>
 </body>
