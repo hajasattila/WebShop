@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon> Jelszó
                     megerősítés</label>
-                <input name="confirmPassword" type="password" required formControlName="confirmPassword">
+                <input name="confirmPassword" type="password" required formControlName="rePassword">
             </div>
 
             <div class="error-block" *ngIf="submitted && registerForm.hasError('passwordsDontMatch')">

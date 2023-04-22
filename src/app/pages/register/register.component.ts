@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    AbstractControl,
-    ValidationErrors,
-    ValidatorFn,
-    Validators,
-    FormGroup,
-    FormBuilder
-} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -19,18 +14,22 @@ export class RegisterComponent implements OnInit {
     submitted = false;
     registerForm: FormGroup;
 
+    loadingSubscription?: Subscription;
+    loadingObservation?: Observable<boolean>;
+    loading: boolean = false;
+
     constructor(
         public router: Router,
-        public fb: FormBuilder
+        public fb: FormBuilder,
+        private authService: AuthService
     ) {
         this.registerForm = this.fb.group(
             {
-                userName: ['', [Validators.required, Validators.minLength(3)]],
                 email: ['', [Validators.required, Validators.email]],
                 password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)]],
                 confirmPassword: ['', Validators.required],
             },
-            { validators: this.passwordsMatchValidator() }
+            { validators: passwordsMatchValidator }
         );
     }
 
@@ -53,25 +52,29 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
-        this.submitted = true;
-        if (this.registerForm.invalid) {
-            return;
-        }
+        this.loading = true;
 
-        const { userName, email, password } = this.registerForm.value;
+        this.authService.signup(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value)
+            .then(cred => {
+                console.log(cred);
+                this.router.navigateByUrl('/login');
+                alert('Sikeresen regisztráltál!')
+                this.loading = false;
+            }).catch(error => {
+                console.error(error);
+                this.loading = false;
+                alert('Nem sikerült regisztrálni!')
+            });
 
-        // do something with the form data, e.g. send it to a server
-    }
-
-    public passwordsMatchValidator(): ValidatorFn {
-        return (control: AbstractControl): ValidationErrors | null => {
-            const password = control.get('password')?.value;
-            const confirmPassword = control.get('confirmPassword')?.value;
-            if (password && confirmPassword && password !== confirmPassword) {
-                return { passwordsDontMatch: true };
-            } else {
-                return null;
-            }
-        };
     }
 }
+
+const passwordsMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('rePassword')?.value;
+    if (password && confirmPassword && password !== confirmPassword) {
+        return { passwordsDontMatch: true };
+    } else {
+        return null;
+    }
+};

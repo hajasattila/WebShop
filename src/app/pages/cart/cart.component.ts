@@ -4,6 +4,7 @@ import { Cart, CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { loadStripe } from '@stripe/stripe-js';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,14 +22,24 @@ export class CartComponent implements OnInit, OnDestroy {
   ];
   dataSource: CartItem[] = [];
   cartSubscription: Subscription | undefined;
+  isLoggedIn = false;
 
-  constructor(private cartService: CartService, private http: HttpClient) {}
+  constructor(private cartService: CartService, private http: HttpClient, private authService: AuthService) {
+    this.authService.isUserLoggedIn().subscribe((user) => {
+      this.isLoggedIn = !!user;
+    });
+  }
 
   ngOnInit(): void {
+    if (!this.authService.isUserLoggedIn()) {
+      alert('Kérlek először jelentkezz be!');
+      window.location.href = '/home';
+    }
     this.cartSubscription = this.cartService.cart.subscribe((_cart: Cart) => {
       this.cart = _cart;
       this.dataSource = _cart.items;
     });
+
   }
 
   getTotal(items: CartItem[]): number {
@@ -63,7 +74,6 @@ export class CartComponent implements OnInit, OnDestroy {
         });
       });
   }
-
   ngOnDestroy() {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();

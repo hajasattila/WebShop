@@ -4,6 +4,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
@@ -12,7 +13,9 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'cart', component: CartComponent
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -24,10 +27,13 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path:
-      'login',
+    path: 'login',
     component: LoginComponent
   },
+  {
+    path: '**',
+    component: HomeComponent // vagy PageNotFoundComponent
+  }
 ];
 
 @NgModule({

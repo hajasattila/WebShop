@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 
@@ -6,11 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  user$: any;
 
-  constructor(private auth: AngularFireAuth) { }
+  constructor(private auth: AngularFireAuth) {
+  }
 
   login(email: string, password: string) {
+    console.log("login");
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
@@ -18,12 +20,14 @@ export class AuthService {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.user$.map((user: any) => !!user);
+
+  isUserLoggedIn() {
+    console.log("user");
+    return this.auth.user;
   }
 
   logout() {
+    console.log("Logged out");
     return this.auth.signOut();
   }
-
 }

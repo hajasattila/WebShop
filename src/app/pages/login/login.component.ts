@@ -38,10 +38,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).then(cred => {
       console.log(cred);
       this.router.navigateByUrl('/home');
+      alert('Sikeresen beléptél!\n' + this.loginForm.get('email')?.value);
       this.loading = false;
-    }).catch(error => { 
+    }).catch(error => {
       console.error(error);
       this.loading = false;
+      alert('Nem sikerült belépni!')
+      
     });
   }
 

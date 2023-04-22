@@ -5,9 +5,13 @@
       <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity"
         matBadgeColor="warn">shopping_cart</mat-icon>
     </button>
-    <button mat-icon-button routerLink="login" class="mr-4">
+    <button mat-icon-button routerLink="login" class="mr-4" *ngIf="!isLoggedIn">
       <mat-icon>account_circle</mat-icon>
     </button>
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()" class="items-center justify-center bg-transparent border-none cursor-pointer text-base text-gray-700 transition-all duration-300 ease-in-out hover:text-white hover:bg-gray-700">
+      <mat-icon>logout</mat-icon>
+    </button>
+
   </div>
 
 

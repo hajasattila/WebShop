@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Cart, CartItem } from 'src/app/models/cart.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -23,8 +24,16 @@ export class HeaderComponent {
       .reduce((prev, curent) => prev + curent, 0);
   }
 
-  constructor(private cartService: CartService) { }
+  isLoggedIn = false;
 
+  constructor(private cartService: CartService, private authService: AuthService) {
+    this.authService.isUserLoggedIn().subscribe((user) => {
+      this.isLoggedIn = !!user;
+    });
+  }
+  logout() {
+    this.authService.logout();
+  }
   getTotal(items: CartItem[]): number {
     return this.cartService.getTotal(items);
   }
