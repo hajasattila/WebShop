@@ -38,6 +38,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { LoginComponent } from './pages/login/login.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
+import { OrderComponent } from './pages/order/order.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FooterComponent } from './components/footer/footer/footer.component';
     CartComponent,
     RegisterComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,46 @@
+body {
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.wrap {
+
+    padding: 20px;
+}
+
+input {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    opacity: 0.7;
+    padding: 10px;
+}
+
+input:focus {
+    outline: none;
+    opacity: 1;
+}
+
+.error-block {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 5px;
+    text-decoration: underline;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group label {
+    flex-basis: 200px;
+    padding-right: 1rem;
+}
+
+.form-group input {
+    flex-grow: 0.05;
+}

@@ -9,10 +9,10 @@
     <button mat-icon-button routerLink="login" class="mr-4" *ngIf="!isLoggedIn">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="isLoggedIn">
+    <button mat-icon-button *ngIf="isLoggedIn" routerLink="order">
       <mat-icon>shop</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()">
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()" routerLink="home">
       <mat-icon>logout</mat-icon>
     </button>
     

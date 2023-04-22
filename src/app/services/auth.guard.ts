@@ -12,12 +12,18 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const user = JSON.parse(localStorage.getItem('user') as string);
-    if (user) {
-      return true;
+
+    if (user && route.routeConfig?.path === 'register') { // ellenőrizzük, hogy az útvonal register-e és ha igen, akkor a homera irányítunk
+      this.router.navigate(['/home'], { queryParams: { cartUnauthorized: true } });
+      return false;
     }
 
-    // Ha a felhasználó nincs bejelentkezve, visszairányítjuk a /home-ra és megjelenítjük az üzenetet
-    this.router.navigate(['/home'], { queryParams: { cartUnauthorized: true } });
-    return false;
+    if (user) {
+      return true;
+    } else {
+      // Ha a felhasználó nincs bejelentkezve, visszairányítjuk a /home-ra
+      this.router.navigate(['/home'], { queryParams: { cartUnauthorized: true } });
+      return false;
+    }
   }
 }
