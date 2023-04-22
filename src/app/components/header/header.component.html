@@ -1,3 +1,4 @@
+<div class="valami"></div>
 <mat-toolbar class="justify-between max-w-7xl mx-auto border-x flex flex-wrap items-center">
   <a routerLink="home" class="mr-4">Műszaki Store</a>
   <div class="flex items-center">
@@ -8,10 +9,13 @@
     <button mat-icon-button routerLink="login" class="mr-4" *ngIf="!isLoggedIn">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()" class="items-center justify-center bg-transparent border-none cursor-pointer text-base text-gray-700 transition-all duration-300 ease-in-out hover:text-white hover:bg-gray-700">
+    <button mat-icon-button *ngIf="isLoggedIn">
+      <mat-icon>shop</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>
-
+    
   </div>
 
 
@@ -19,7 +23,9 @@
     <div class="p-3 divide-y divide-solid">
       <div class="pb-3 flex justify-between">
         <span class="mr-16">{{ cart.items.length }} termék</span>
-        <a routerLink="cart" style="background: #b3acac;border-radius: 0.5rem;">Kosár megtekintése</a>
+        <a routerLink="cart" style="background: #b3acac;border-radius: 0.5rem;" (click)="onViewCart()">
+          Kosár megtekintése
+        </a>
       </div>
       <div *ngIf="cart.items.length" class="py-3">
         <div *ngFor="let item of cart.items" class="flex justify-between font-light mb-2">
@@ -37,7 +43,7 @@
         <button (click)="onClearCart()" class="bg-rose-600 text-white rounded-full w-9 h-9">
           <mat-icon>remove_shopping_cart</mat-icon>
         </button>
-        <button routerLink="cart" class="bg-green-600 text-white rounded-full w-9 h-9">
+        <button routerLink="cart" class="bg-green-600 text-white rounded-full w-9 h-9" (click)="onViewCart()"> 
           <mat-icon>shopping_cart_checkout</mat-icon>
         </button>
       </div>

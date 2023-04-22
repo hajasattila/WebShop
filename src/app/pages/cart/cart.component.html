@@ -1,18 +1,18 @@
-<mat-card *ngIf="cart.items.length" class="max-w-7xl mx-auto">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
-    <ng-container matColumnDef="product">
+<mat-card *ngIf="cart.items.length" class="mx-auto my-1 max-w-2xl" style="text-align: center;justify-content: center;margin: 0 auto;">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 w-1" style="text-align: center;justify-content: center;margin: 0 auto;">
+    <ng-container matColumnDef="product" style="text-align: center;justify-content: center;margin: 0 auto;">
       <th mat-header-cell *matHeaderCellDef>Termék: </th>
       <td mat-cell *matCellDef="let element">
-        <img src="{{ element.product }}" alt="product" class="w-[100px] my-5" />
+        <img src="{{ element.product }}" alt="product" class="w-[100px] my-1" />
       </td>
       <td mat-footer-cell *matFooterCellDef>
         <button mat-raised-button routerLink="/home">Vásárlás folytatása</button>
       </td>
     </ng-container>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Megnevezés: </th>
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <p class="truncate max-w-xs">{{ element.name }}</p>
+        <!-- <p class="truncate max-w-xs">{{ element.name }}</p> -->
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
@@ -40,38 +40,45 @@
         {{ element.quantity * element.price | currency }}
       </td>
       <td mat-footer-cell *matFooterCellDef>
-        <span class="font-bold py-5 block">{{
+        <span class="font-bold py-1 block">{{
           getTotal(cart.items) | currency
           }}</span>
       </td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>
-        <button (click)="onClearCart()" mat-raised-button color="warn" class="float-right">
-          Törlés
-        </button>
       </th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="onRemoveFromCart(element)" mat-mini-fab color="warn" class="float-right">
+        <!-- <button (click)="onRemoveFromCart(element)" mat-mini-fab color="warn" class="float-right">
           <mat-icon>close</mat-icon>
-        </button>
+        </button> -->
       </td>
       <td mat-footer-cell *matFooterCellDef>
-        <button (click)="onCheckout()" *ngIf="isLoggedIn"
-          class="float-right px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
-          Fizetés
-        </button>
-        <button (click)="onCheckout()" *ngIf="!isLoggedIn"
-          class="float-right px-4 py-2 text-white bg-red-500 rounded-md cursor-not-allowed opacity-50" disabled>
-          Jelentkezzen be!
-        </button>
+
       </td>
+
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
   </table>
+  <div style="text-align: center;margin-top: 1rem;">
+    <button (click)="onCheckout()" *ngIf="isLoggedIn"
+      class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 justify-content" >
+      Fizetés
+    </button>
+    <button (click)="onCheckout()" *ngIf="!isLoggedIn"
+      class="px-4 py-2 text-white bg-red-500 rounded-md cursor-not-allowed opacity-50" disabled>
+      Jelentkezzen be!
+    </button>
+    <span style="margin: 0 8px;"></span>
+    <button (click)="onClearCart()" mat-raised-button color="warn"
+      class="mr-2 px-4 py-2 text-white rounded-md hover:bg-red-400">
+      Törlés
+    </button>
+  </div>
 </mat-card>
 <div class="mx-auto my-3 max-w-7xl">
   <mat-card *ngIf="!cart.items.length" class="text-center p-8">

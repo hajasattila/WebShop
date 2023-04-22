@@ -1,0 +1,27 @@
+.footer {
+    bottom: 0;
+    padding: 19px 15px 20px;
+    position: absolute;
+    right: 0;
+    color: #98a6ad;
+    left: 210px;
+    background-color: #ffffff;
+    box-shadow: 0 0 1px rgba(50, 58, 70, .1);
+
+    .footer-links {
+        a {
+            color: #98a6ad;
+            margin-left: 1.5rem;
+            transition: all .4s;
+
+            &:hover {
+                color: #323a46;
+                ;
+            }
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+        }
+    }
+}

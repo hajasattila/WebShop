@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
   private _cart: Cart = { items: [] };
@@ -31,8 +32,19 @@ export class HeaderComponent {
       this.isLoggedIn = !!user;
     });
   }
+  
+
+  onViewCart(): void {
+    if (!this.isLoggedIn) {
+      alert('Először jelentkezzen be!');
+      return;
+    }
+  }
+
   logout() {
     this.authService.logout();
+    alert('Viszlát!');
+    return;
   }
   getTotal(items: CartItem[]): number {
     return this.cartService.getTotal(items);
