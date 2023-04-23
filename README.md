@@ -4,11 +4,15 @@ Ez a webáruház a SZTE Webfejlesztési keretrendszerek gy.-ra készült, mint k
 ## Futtatási útmutató
 A webáruház futtatásához először telepíteni kell a függőségeket a projekt könyvtárában az alábbi paranccsal:
 
-``` npm install ```
+```
+npm install
+```
 
 Ezután a fejlesztői szerver elindításához a következő parancsot kell futtatni:
 
-```ng serve```
+```
+ng serve
+```
 
 A webáruház elérhető lesz a localhost:4200 címen.
 
