@@ -4,19 +4,34 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" name="form">
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 5px;">email</mat-icon> Email cím</label>
-                <input name="email" type="email" required formControlName="email" placeholder="Minta@email.com">
+                <input name="email" type="email" required formControlName="email" placeholder="Minta@email.com" class="mb-4">
             </div>
             <div class="error-block" *ngIf="submitted && !registerForm.controls['email'].valid">
                 <div *ngIf="registerForm.controls['email'].hasError('email')">Érvényes e-mail címet adj meg!</div>
             </div>
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon>Jelszó</label>
-                <input name="password" type="password" required formControlName="password" placeholder="Jelszó">
+                <div class="relative mb-4 rounded-md">
+                    <input type="{{ showPassword ? 'text' : 'password' }}" id="password"
+                        class="border border-gray-300 p-2 w-full rounded-md pr-10" formControlName="password" required>
+                    <button type="button" class="absolute top-0 right-0 h-full px-2 focus:outline-none"
+                        (click)="showPassword = !showPassword">
+                        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon> Jelszó
                     megerősítés</label>
-                <input name="rePassword" type="password" required formControlName="rePassword" placeholder="JelszóMegint">
+                <div class="relative mb-4 rounded-md">
+                    <input name="rePassword" type="{{ showPassword ? 'text' : 'password' }}" id="password"
+                        class="border border-gray-300 p-2 w-full rounded-md pr-10" formControlName="rePassword"
+                        required>
+                    <button type="button" class="absolute top-0 right-0 h-full px-2 focus:outline-none"
+                        (click)="showPassword = !showPassword">
+                        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </div>
             </div>
             <div class="error-block" *ngIf="submitted && registerForm.hasError('passwordsDontMatch')">
                 <div *ngIf="registerForm.errors?.['passwordsDontMatch'] === true">A jelszavak nem egyeznek meg</div>

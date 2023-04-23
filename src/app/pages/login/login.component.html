@@ -7,12 +7,18 @@
             </label>
             <input matInput type="text" class="border border-gray-300 p-2 w-full mb-4 rounded-md"
                 formControlName="email" required />
-
-            <label for="password" class="block font-medium mb-2">Jelszó: <mat-icon matPrefix
-                    style="padding-top: 2.5px;">lock_outline</mat-icon>
+            <label for="password" class="block font-medium mb-2">Jelszó:
+                <mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon>
             </label>
-            <input type="password" id="password" class="border border-gray-300 p-2 w-full mb-4 rounded-md"
-                formControlName="password" required>
+
+            <div class="relative mb-4 rounded-md">
+                <input  type="{{ showPassword ? 'text' : 'password' }}" id="password" class="border border-gray-300 p-2 w-full rounded-md pr-10"
+                    formControlName="password" required>
+                <button type="button" class="absolute top-0 right-0 h-full px-2 focus:outline-none"
+                    (click)="showPassword = !showPassword">
+                    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </div>
 
             <div class="flex justify-center">
                 <button

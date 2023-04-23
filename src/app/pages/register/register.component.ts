@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     loadingSubscription?: Subscription;
     loadingObservation?: Observable<boolean>;
     loading: boolean = false;
+    showPassword: boolean = false;
     constructor(public router: Router, public fb: FormBuilder, private authService: AuthService, private userService: UserService,) {
         /* this.registerForm = this.fb.group(
             {

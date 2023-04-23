@@ -10,13 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
+  showPassword: boolean = false;
 
   email = new FormControl('');
   password = new FormControl('');
   loadingSubscription?: Subscription;
   loadingObservation?: Observable<boolean>;
   loading: boolean = false;
-  
+
   constructor(private router: Router, private authService: AuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
