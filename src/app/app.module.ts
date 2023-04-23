@@ -52,7 +52,7 @@ import { OrderComponent } from './pages/order/order.component';
     RegisterComponent,
     LoginComponent,
     FooterComponent,
-    OrderComponent
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

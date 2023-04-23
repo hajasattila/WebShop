@@ -13,8 +13,8 @@ export class OrderService {
   create(order: Order) {
     return this.afs.collection<Order>(this.collectionName).doc(order.id).set(order);
   }
-  getAll() {
-    return this.afs.collection<Order>(this.collectionName).valueChanges();
+  getAll(userId: string) {
+    return this.afs.collection<Order>(this.collectionName, ref => ref.where('id', '>=', userId).where('id', '<', userId + '\uf8ff')).valueChanges();
   }
   getById(id: string) {
     return this.afs.collection<Order>(this.collectionName).doc(id).valueChanges();
@@ -22,10 +22,7 @@ export class OrderService {
   update(order: Order) {
     return this.afs.collection<Order>(this.collectionName).doc(order.id).set(order);
   }
-  delete(id: string) {
-    return this.afs.collection<Order>(this.collectionName).doc(id).delete();
-  }
-  getOrdersByUserId(userId: string) {
-    return this.afs.collection<Order>(this.collectionName, ref => ref.where('id', '==', userId)).valueChanges();
+  delete(order: Order) {
+    return this.afs.collection<Order>(this.collectionName).doc(order.id).delete();
   }
 }
