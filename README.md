@@ -21,6 +21,7 @@ A Műszaki Webstore az alábbi technológiákat használja:
 
 * [Angular](https://angular.io/)
 * [Firebase](https://firebase.google.com/)
+* [TailWind CSS](https://tailwindcss.com/)
 
 ## Felhasználói regisztráció
 Az optimális felhasználói élmény érdekében javasoljuk, hogy regisztrálj egy fiókot a webáruházban. 
