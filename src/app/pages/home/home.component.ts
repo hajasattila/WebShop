@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cols = 3;
   rowHeight: number = ROWS_HEIGHT[this.cols];
   products: Array<Product> | undefined;
-  count = '12';
+  count = '3';
   sort = 'asd';
   category: string | undefined;
   productsSubscription: Subscription | undefined;
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getProducts(): void {
     this.productsSubscription = this.storeService
-      .getAllProducts(this.count, this.sort, this.category)
+      .getAllProducts(this.count, this.sort)
       .subscribe((_products) => {
         this.products = _products;
       });

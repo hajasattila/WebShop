@@ -20,7 +20,6 @@ export class AuthService {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-
   isUserLoggedIn() {
     console.log("user");
     return this.auth.user;

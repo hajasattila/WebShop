@@ -1,1 +1,51 @@
-<p>order works!</p>
+<body>
+
+    <div class="valami text-center" *ngIf="email">
+        Üdvözlünk: <strong>{{ email.split('@')[0] }}</strong> !
+    </div>
+    <div style="margin-top: 2rem;"></div>
+    <table mat-table [dataSource]="orders" class="table-auto">
+        <!-- Product name column -->
+        <ng-container matColumnDef="productName">
+            <th class="border px-4 py-2" mat-header-cell *matHeaderCellDef style="text-align: center;">Megnevezés</th>
+            <td class="border px-4 py-2" mat-cell *matCellDef="let order">{{ order.productName }}</td>
+        </ng-container>
+
+        <!-- Quantity column -->
+        <ng-container matColumnDef="quantity">
+            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Mennyiség</th>
+            <td class="border" mat-cell *matCellDef="let order">{{ order.quantity }}</td>
+        </ng-container>
+
+        <!-- Total price column -->
+        <ng-container matColumnDef="totalPrice">
+            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Total</th>
+            <td class="border" mat-cell *matCellDef="let order">{{ order.totalPrice }}</td>
+        </ng-container>
+
+        <!-- Timestamp column -->
+        <ng-container matColumnDef="timestamp">
+            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Rendelés dátuma</th>
+            <td class="border" mat-cell *matCellDef="let order">{{ order.timestamp }}</td>
+        </ng-container>
+
+        <!-- Edit and delete column -->
+        <ng-container matColumnDef="actions">
+            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Szerkesztés</th>
+            <td class="border" mat-cell *matCellDef="let order">
+                <div class="flex justify-center items-center">
+                    <button class="cursor-pointer mr-2 hover:text-blue-500">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button class="cursor-pointer hover:text-red-500">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr class="bg-gray-100" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="hover:bg-gray-200" mat-row *matRowDef="let row; columns: displayedColumns;"
+            [class.bg-yellow-100]="row.id === highlightedId"></tr>
+    </table>
+</body>

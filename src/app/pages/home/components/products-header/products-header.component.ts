@@ -8,7 +8,7 @@ export class ProductsHeaderComponent {
   @Output() columnsCountChange = new EventEmitter<number>();
   @Output() itemsCountChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<string>();
-  itemsShowCount = 12;
+  itemsShowCount = 3;
   sort = 'alapértelmezett';
 
   constructor() {}

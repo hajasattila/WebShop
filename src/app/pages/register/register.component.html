@@ -9,33 +9,29 @@
             <div class="error-block" *ngIf="submitted && !registerForm.controls['email'].valid">
                 <div *ngIf="registerForm.controls['email'].hasError('email')">Érvényes e-mail címet adj meg!</div>
             </div>
-
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon>Jelszó</label>
-                <input name="password" type="password" required formControlName="password">
+                <input name="password" type="password" required formControlName="password" placeholder="Jelszó">
             </div>
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon> Jelszó
                     megerősítés</label>
-                <input name="confirmPassword" type="password" required formControlName="rePassword">
+                <input name="rePassword" type="password" required formControlName="rePassword" placeholder="JelszóMegint">
             </div>
-
             <div class="error-block" *ngIf="submitted && registerForm.hasError('passwordsDontMatch')">
                 <div *ngIf="registerForm.errors?.['passwordsDontMatch'] === true">A jelszavak nem egyeznek meg</div>
             </div>
-            <div class="error-block" *ngIf="submitted && (password?.invalid || confirmPassword?.invalid)">
+            <!-- <div class="error-block" *ngIf="submitted && (password?.invalid || confirmPassword?.invalid)">
                 <div *ngIf="password?.errors?.['minlength']">A jelszó minimum 6 karakter hosszú legyen</div>
                 <div *ngIf="password?.errors?.['pattern']">A jelszónak tartalmaznia kell legalább egy számot, egy
                     nagybetűt és egy kisbetűt
                 </div>
-            </div>
-
+            </div> -->
             <div style="margin-top: 1rem;"></div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Regisztráció
             </button>
         </form>
-
         <div style="margin-top: 1rem;"></div>
         <div class="flex justify-center mt-4">
             <div class="mat-menu-item">
