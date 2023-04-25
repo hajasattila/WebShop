@@ -55,6 +55,7 @@ import { OrderComponent } from './pages/order/order.component';
     OrderComponent,
   ],
   imports: [
+    /*Legalább 10 különböző material elem*/
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,

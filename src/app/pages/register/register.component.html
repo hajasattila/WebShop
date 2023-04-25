@@ -1,6 +1,7 @@
 <body ng-cloak ng-app="contactForm">
     <div class="wrap" ng-controller="ContactFormCtrl">
         <h1>Regisztáricó <mat-icon matPrefix style="padding-top: 5px;">person</mat-icon></h1>
+        <!-- Adatbevitel angular form segítségével -->
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" name="form">
             <div class="form-group">
                 <label><mat-icon matPrefix style="padding-top: 5px;">email</mat-icon> Email cím</label>

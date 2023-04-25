@@ -19,6 +19,7 @@ export class OrderComponent implements OnInit {
 
   constructor(private authService: AuthService, private orderService: OrderService) { }
 
+  /* Lifecycle hook*/
   ngOnInit(): void {
     this.authService.isUserLoggedIn().subscribe((user) => {
       if (user) {

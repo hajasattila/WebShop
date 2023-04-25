@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(private cartService: CartService, private authService: AuthService) { }
 
+
+  /*Lifecycle hook*/
   ngOnInit() {
     this.cartService.cart.subscribe((_cart) => {
       this.cart = _cart;

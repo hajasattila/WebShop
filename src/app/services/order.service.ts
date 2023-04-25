@@ -8,12 +8,13 @@ import { Order } from '../models/Order';
 export class OrderService {
   collectionName = 'Orders'
   constructor(private afs: AngularFirestore) { }
-  //CRUD (Create, Read, Update, Delete)
-
+  //CRUD (Create, Read, Update, Delete) létrehozása
+  
   create(order: Order) {
     return this.afs.collection<Order>(this.collectionName).doc(order.id).set(order);
   }
   getAll(userId: string) {
+    //1 komplex lekérdezés where a doksi alapján annak számít!
     return this.afs.collection<Order>(this.collectionName, ref => ref.where('id', '>=', userId).where('id', '<', userId + '\uf8ff')).valueChanges();
   }
   getById(id: string) {

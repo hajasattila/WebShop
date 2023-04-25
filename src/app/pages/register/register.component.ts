@@ -12,21 +12,21 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
+    //Ebben a fileban vannak környezeti változók firebasehoz pl.
     submitted = false;
     registerForm: FormGroup;
     loadingSubscription?: Subscription;
     loadingObservation?: Observable<boolean>;
     loading: boolean = false;
     showPassword: boolean = false;
-    constructor(public router: Router, public fb: FormBuilder, private authService: AuthService, private userService: UserService,) {
-        /* this.registerForm = this.fb.group(
-            {
-                email: ['', [Validators.required, Validators.email]],
-                password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)]],
-                rePassword: ['', Validators.required],
-            },
-            { validators: passwordsMatchValidator }
-        ); */
+
+    constructor(
+        public router: Router,
+        public fb: FormBuilder,
+        private authService: AuthService,
+        private userService: UserService,
+    ) {
         this.registerForm = new FormGroup({
             id: new FormControl(''),
             email: new FormControl('', [Validators.required, Validators.email]),
@@ -34,30 +34,45 @@ export class RegisterComponent implements OnInit {
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)]),
             rePassword: new FormControl('', Validators.required),
         });
+
+        // Validációs függvény hozzáadása a password mezőhöz
+        this.registerForm.controls['password'].valueChanges.subscribe(() => {
+            this.registerForm.controls['password'].setErrors(null);
+            if (this.registerForm.controls['password'].value !== this.registerForm.controls['rePassword'].value) {
+                this.registerForm.controls['password'].setErrors({ mismatched: true });
+            }
+        });
     }
+
     ngOnInit(): void { }
+
     onSubmit() {
         this.loading = true;
-        this.authService.signup(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).then(cred => {
-            console.log(cred);
-            const user: User = {
-                id: cred.user?.uid as string,
-                email: this.registerForm.get('email')?.value,
-                username: this.registerForm.get('email')?.value.split('@')[0]
-            };
-            this.userService.create(user).then(_ => {
-                console.log('Sikeresen hozzáadva!')
+        this.authService
+            .signup(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value)
+            .then((cred) => {
+                console.log(cred);
+                const user: User = {
+                    id: cred.user?.uid as string,
+                    email: this.registerForm.get('email')?.value,
+                    username: this.registerForm.get('email')?.value.split('@')[0],
+                };
+                this.userService
+                    .create(user)
+                    .then((_) => {
+                        console.log('Sikeresen hozzáadva!');
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+                this.router.navigateByUrl('/login');
+                alert('Sikeresen regisztráltál!')
+                this.loading = false;
             }).catch(error => {
                 console.error(error);
+                this.loading = false;
+                alert('Nem sikerült regisztrálni!')
             });
-            this.router.navigateByUrl('/login');
-            alert('Sikeresen regisztráltál!')
-            this.loading = false;
-        }).catch(error => {
-            console.error(error);
-            this.loading = false;
-            alert('Nem sikerült regisztrálni!')
-        });
     }
 }
 

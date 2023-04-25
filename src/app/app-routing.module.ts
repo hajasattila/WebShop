@@ -9,6 +9,7 @@ import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
+  /* leggalább 4 különböző rout*/
   {
     path: 'home',
     component: HomeComponent,
@@ -16,11 +17,13 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+    //AuthGuard 1
     canActivate: [AuthGuard]
   },
   {
     path: 'order',
     component: OrderComponent,
+    //AuthGuard 2
     canActivate: [AuthGuard]
   },
   {

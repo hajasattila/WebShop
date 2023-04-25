@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'dateFormat'
 })
 export class DateFormatPipe implements PipeTransform {
+    /*Saját pipe osztály az orderhez*/
     transform(value: string, format: string = 'yyyy.MM.dd.'): string {
         const date = new Date(value);
         const year = date.getFullYear();

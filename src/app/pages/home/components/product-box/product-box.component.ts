@@ -10,9 +10,19 @@ export class ProductBoxComponent {
   @Input() product: Product | undefined;
   @Output() addToCart = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
   onAddToCart(): void {
     this.addToCart.emit(this.product);
+  }
+
+  showFullTitle(event: MouseEvent) {
+    const element = event.currentTarget as HTMLElement;
+    element.classList.remove('truncate');
+  }
+
+  hideFullTitle(event: MouseEvent) {
+    const element = event.currentTarget as HTMLElement;
+    element.classList.add('truncate-text');
   }
 }

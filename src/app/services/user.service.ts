@@ -8,7 +8,7 @@ import { User } from '../models/User';
 export class UserService {
   collectionName = 'Users'
   constructor(private afs: AngularFirestore) { }
-  //CRUD (Create, Read, Update, Delete)
+  //CRUD(Create, Read, Update, Delete) műveletek serviceba vannak kiszervezve.
 
   create(user: User) {
     return this.afs.collection<User>(this.collectionName).doc(user.id).set(user);

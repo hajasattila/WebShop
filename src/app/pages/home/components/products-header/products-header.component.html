@@ -1,16 +1,12 @@
 <mat-card class="mb-1 justify-between">
   <div class="flex justify-between items-center">
     <div class="flex justify-center items-center">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Kategóriák </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-selection-list [multiple]="false">
-          <mat-list-option>
-            <button></button>
-          </mat-list-option>
-        </mat-selection-list>
-      </mat-expansion-panel>
+      <button (click)="onColumnsUpdated(1)">
+        <mat-icon>view_list</mat-icon>
+      </button>
+      <button (click)="onColumnsUpdated(3)">
+        <mat-icon>view_module</mat-icon>
+      </button>
     </div>
     <div class="flex items-center">
       <!-- <button (click)="onColumnsUpdated(1)">

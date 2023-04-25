@@ -1,25 +1,24 @@
 <body>
     <div class="wrap">
-        <form class="w-1/6 mx-auto mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
-            <h1>Belépés<mat-icon matPrefix style="padding-top: 5px;">person</mat-icon></h1>
+        <!-- Adatbeviteli form -->
+        <form class="w-full sm:w-5/6 mx-auto mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
+            <h1 class="text-xl sm:text-2xl">Belépés<mat-icon matPrefix style="padding-top: 5px;">person</mat-icon></h1>
             <label for="email" class="block font-medium mb-2">E-mail: <mat-icon matPrefix
                     style="padding-top: 5px;">email</mat-icon>
             </label>
-            <input matInput type="text" class="border border-gray-300 p-2 w-full mb-4 rounded-md"
+            <input matInput type="text" class="border border-gray-300 p-2 w-60 sm:text-sm mb-4 rounded-md"
                 formControlName="email" required />
             <label for="password" class="block font-medium mb-2">Jelszó:
                 <mat-icon matPrefix style="padding-top: 2.5px;">lock_outline</mat-icon>
             </label>
-
             <div class="relative mb-4 rounded-md">
-                <input  type="{{ showPassword ? 'text' : 'password' }}" id="password" class="border border-gray-300 p-2 w-full rounded-md pr-10"
-                    formControlName="password" required>
-                <button type="button" class="absolute top-0 right-0 h-full px-2 focus:outline-none"
+                <input type="{{ showPassword ? 'text' : 'password' }}" id="password"
+                    class="border border-gray-300 p-2 w-60 sm:text-sm rounded-md pr-10" formControlName="password" required>
+                <button type="button" class="absolute top-1 h-full px-2 focus:outline-none"
                     (click)="showPassword = !showPassword">
                     <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                 </button>
             </div>
-
             <div class="flex justify-center">
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">

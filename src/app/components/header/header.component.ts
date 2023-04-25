@@ -9,10 +9,11 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  
   private _cart: Cart = { items: [] };
   itemsQuantity = 0;
 
-  @Input()
+  @Input()      //1 input
   get cart(): Cart {
     return this._cart;
   }
