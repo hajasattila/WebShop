@@ -44,4 +44,14 @@ export class OrderComponent implements OnInit {
       });
     }
   }
+
+  updateOrder(order: Order) {
+    if (confirm('Biztosan módosítani szeretné ezt a rendelést?')) {
+      this.orderService.update(order).then(() => {
+        alert('A mennyiség módosítása sikeres volt!');
+      }).catch(() => {
+        alert('Hiba történt a mennyiség módosítása közben!');
+      });
+    }
+  }
 }

@@ -39,6 +39,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { LoginComponent } from './pages/login/login.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
 import { OrderComponent } from './pages/order/order.component';
+import { HighlightDirective } from './highlight.directive';
+import { TableBackgroundDirective } from './tablebackground.directive';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { OrderComponent } from './pages/order/order.component';
     LoginComponent,
     FooterComponent,
     OrderComponent,
+    HighlightDirective,
+    TableBackgroundDirective
   ],
   imports: [
     /*Legalább 10 különböző material elem*/

@@ -1,5 +1,5 @@
 <body>
-    <div class="valami text-center" *ngIf="email">
+    <div class="valami text-center" *ngIf="email" setBackground>
         Üdvözlünk: <strong>{{ email.split('@')[0] }}</strong> !
     </div>
     <div *ngIf="orders.length === 0" class="text-lg font-bold text-red-500 mt-4">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div style="margin-top: 2rem;"></div>
-    <table *ngIf="orders.length > 0" mat-table [dataSource]="orders" class="mat-elevation-z8">
+    <table *ngIf="orders.length > 0" mat-table [dataSource]="orders" class="mat-elevation-z8" myTableBackground>
 
         <!-- Product name column -->
         <ng-container matColumnDef="productName">
@@ -39,7 +39,7 @@
 
         <!-- Timestamp column -->
         <ng-container matColumnDef="timestamp">
-            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Rendelés dátuma</th>
+            <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Rendelés érkezése</th>
             <td class="border" mat-cell *matCellDef="let order">{{ dateFormatPipe.transform(order.timestamp) }}</td>
         </ng-container>
 
@@ -48,9 +48,10 @@
             <th class="border" mat-header-cell *matHeaderCellDef style="text-align: center;">Szerkesztés</th>
             <td class="border" mat-cell *matCellDef="let order">
                 <div class="flex justify-center items-center">
-                    <button class="cursor-pointer mr-2 hover:text-blue-500">
+                    <!-- <button class="cursor-pointer mr-2 hover:text-blue-500 " (click)="updateOrder(order)">
                         <mat-icon>edit</mat-icon>
-                    </button>
+                    </button> -->
+                    <!-- Direktíve kettő -->
                     <button class="cursor-pointer hover:text-red-500" (click)="deleteOrder(order)">
                         <mat-icon>delete</mat-icon>
                     </button>
